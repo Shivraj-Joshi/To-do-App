@@ -1,6 +1,12 @@
 import React from "react";
 
 const List = ({ tasks, toggleComplete, deleteTask }) => {
+  console.log("Tasks received by List:", tasks);
+
+  if (!tasks || tasks.length === 0) {
+    return <p>No tasks to display</p>;
+  }
+
   return (
     <div>
       <ul>

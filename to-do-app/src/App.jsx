@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Input from "./components/Input";
 import List from "./components/List";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const savedTasks = JSON.parse(localStorage.getItem("tasks"));
+    if (savedTasks && Array.isArray(savedTasks)) {
+      setTasks(savedTasks);
+      console.log("loading the tasks from local storage:", savedTasks);
+    }
+  }, []); // to retrieve data(tasks) from the local storage
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log("the task is added to the local storage", tasks);
+  }, [tasks]); // storing the tasks in the local storage
 
   const addTask = (task) => {
     setTasks([...tasks, { id: Date.now(), text: task, isCompleted: false }]);
