@@ -14,8 +14,10 @@ function App() {
   }, []); // to retrieve data(tasks) from the local storage
 
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    console.log("the task is added to the local storage", tasks);
+    if (tasks.length > 0) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      console.log("the task is added to the local storage", tasks);
+    }
   }, [tasks]); // storing the tasks in the local storage
 
   const addTask = (task) => {
